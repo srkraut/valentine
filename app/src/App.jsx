@@ -123,55 +123,61 @@ function LoveLetter({ onClose }) {
 function RunawayButton({ onInteract }) {
   const [pos, setPos] = useState(null)
   const [count, setCount] = useState(0)
+  const [started, setStarted] = useState(false)
 
   const noTexts = [
-    'No',
-    'Are you sure?',
-    'Really sure?',
-    'Think again!',
-    'Last chance!',
-    'Surely not?',
-    'You might regret this!',
-    'Give it another thought!',
-    'Are you crazy?!',
-    'I dare you to say no!',
-    'Come on, say yes!',
-    'Pretty please?',
-    "I'll be sad :(",
-    "You're breaking my heart!",
-    'NOOOO, pick YES!',
+    'No 😢',
+    'Are you sure? 😢',
+    'Really sure? 😭',
+    'Think again! 😭',
+    'Last chance! 😭',
+    'Surely not? 😿',
+    'You might regret this! 😭',
+    'Give it another thought! 😢',
+    'Are you crazy?! 😭',
+    'I dare you to say no! 😤',
+    'Come on, say yes! 😭',
+    'Pretty please? 🥺',
+    "I'll be sad 😭😭",
+    "You're breaking my heart! 💔😭",
+    'NOOOO, pick YES! 😭😭😭',
   ]
 
-  const runAway = () => {
-    const padding = 60
-    const maxX = window.innerWidth - 200
-    const maxY = window.innerHeight - 60
-    const newX = padding + Math.random() * (maxX - padding)
-    const newY = padding + Math.random() * (maxY - padding)
+  // On mount, snap to the placeholder position (nudged up 20px)
+  useEffect(() => {
+    const anchor = document.getElementById('no-anchor')
+    if (anchor) {
+      const rect = anchor.getBoundingClientRect()
+      setPos({ x: rect.left, y: rect.top - 20 })
+    }
+  }, [])
+
+  const runAway = useCallback(() => {
+    setStarted(true)
+    const vw = document.documentElement.clientWidth
+    const vh = document.documentElement.clientHeight
+    const margin = 30
+    const btnW = 180
+    const btnH = 55
+    const newX = margin + Math.random() * (vw - btnW - margin * 2)
+    const newY = margin + Math.random() * (vh - btnH - margin * 2)
     setPos({ x: newX, y: newY })
     setCount((c) => {
       const next = c + 1
       onInteract(next)
       return next
     })
-  }
+  }, [onInteract])
+
+  if (!pos) return null
 
   return (
     <button
-      className="btn btn-no"
-      style={
-        pos
-          ? {
-              position: 'fixed',
-              left: pos.x,
-              top: pos.y,
-              zIndex: 1000,
-              transition: 'left 0.2s ease-out, top 0.2s ease-out',
-            }
-          : {}
-      }
+      className="btn btn-no btn-no-fixed"
+      style={{ left: `${pos.x}px`, top: `${pos.y}px` }}
       onMouseEnter={runAway}
-      onTouchStart={runAway}
+      onClick={runAway}
+      onTouchStart={(e) => { e.preventDefault(); runAway() }}
     >
       {noTexts[Math.min(count, noTexts.length - 1)]}
     </button>
@@ -193,6 +199,14 @@ function App() {
       <FloatingHearts />
 
       <div className="main-container">
+        {noCount >= 3 && (
+          <p className="hint-text">
+            {noCount >= 8
+              ? "The 'No' button is literally running from you... take the hint! 😂"
+              : "Hmm, that button seems to have a mind of its own... 🤔"}
+          </p>
+        )}
+
         <div className="photo-frame">
           <div className="heart-shape">
             <img src="/photos/me.png" alt="Saroj" className="hero-photo" />
@@ -211,17 +225,11 @@ function App() {
             Yes! 💖
           </button>
 
-          <RunawayButton onInteract={handleNoInteract} />
+          <span className="btn-no-placeholder" id="no-anchor">No</span>
         </div>
-
-        {noCount >= 3 && (
-          <p className="hint-text">
-            {noCount >= 8
-              ? "The 'No' button is literally running from you... take the hint! 😂"
-              : "Hmm, that button seems to have a mind of its own... 🤔"}
-          </p>
-        )}
       </div>
+
+      <RunawayButton onInteract={handleNoInteract} />
 
       {showModal && <LoveLetter onClose={() => setShowModal(false)} />}
     </>
