@@ -1,0 +1,6 @@
+services:
+  valentine:
+    build: .
+    ports:
+      - "8740:80"
+    restart: unless-stopped
