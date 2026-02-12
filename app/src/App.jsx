@@ -207,9 +207,19 @@ function App() {
           </p>
         )}
 
-        <div className="photo-frame">
-          <div className="heart-shape">
-            <img src="/photos/me.png" alt="Saroj" className="hero-photo" />
+        <div className="photo-section">
+          <div className="ecg-container">
+            <svg className="ecg-line" viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <polyline
+                className="ecg-path"
+                points="0,60 100,60 120,60 140,55 160,65 180,60 200,60 220,60 240,60 260,20 270,100 280,10 290,90 300,60 320,60 340,60 400,60 420,60 440,55 460,65 480,60 500,60 520,60 540,60 560,20 570,100 580,10 590,90 600,60 620,60 640,60 700,60 720,60 740,55 760,65 780,60 800,60 820,60 840,60 860,20 870,100 880,10 890,90 900,60 920,60 940,60 1000,60 1020,60 1040,55 1060,65 1080,60 1100,60 1120,60 1140,60 1160,20 1170,100 1180,10 1190,90 1200,60"
+              />
+            </svg>
+          </div>
+          <div className="photo-frame">
+            <div className="heart-shape">
+              <img src="/photos/me.png" alt="Saroj" className="hero-photo" />
+            </div>
           </div>
         </div>
 

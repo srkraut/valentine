@@ -43,15 +43,67 @@
   overflow: hidden;
 }
 
-/* ========== Photo in Heart Shape ========== */
-.photo-frame {
-  margin-bottom: 2rem;
-  animation: pulse 2s ease-in-out infinite;
+/* ========== Photo Section with ECG ========== */
+.photo-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 700px;
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+.ecg-container {
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  overflow: hidden;
+  z-index: 0;
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+.ecg-line {
+  width: 200%;
+  height: 100%;
+  animation: ecg-scroll 3s linear infinite;
+}
+
+.ecg-path {
+  fill: none;
+  stroke: #ff1744;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px #ff1744) drop-shadow(0 0 15px #ff1744) drop-shadow(0 0 30px rgba(255, 23, 68, 0.5));
+}
+
+@keyframes ecg-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ========== Photo in Heart Shape ========== */
+.photo-frame {
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+  animation: heartbeat-real 1.2s ease-in-out infinite;
+}
+
+/* Realistic dhuk-dhuk heartbeat: two quick pumps then a rest */
+@keyframes heartbeat-real {
+  0%   { transform: scale(1); }
+  8%   { transform: scale(1.15) rotate(-2deg); }
+  15%  { transform: scale(0.97) rotate(1deg); }
+  22%  { transform: scale(1.12) rotate(-1deg); }
+  30%  { transform: scale(0.98) rotate(0deg); }
+  45%  { transform: scale(1); }
+  100% { transform: scale(1); }
 }
 
 .heart-shape {
