@@ -1,0 +1,36 @@
+# Dependencies
+app/node_modules
+node_modules
+
+# Build output
+app/dist
+dist
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+coverage
+
+# Environment
+.env
+.env.local
+
+# Photos not needed in build context
+sarojphotos
+romanphotos/*.mp4
+
+# Claude
+.claude
