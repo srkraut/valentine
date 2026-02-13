@@ -1,13 +1,13 @@
 version: '3.8'
 
 services:
-  valentine-xuraj:
+  valentine-samir:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: valentine-xuraj
+    container_name: valentine-samir
     ports:
-      - "6000:80"
+      - "7000:80"
     restart: unless-stopped
     environment:
       - NODE_ENV=production
