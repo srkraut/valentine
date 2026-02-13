@@ -2,9 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react'
 import './App.css'
 
 const PHOTOS = [
-  '/photos/roman-couple1.jpeg',
-  '/photos/roman-couple2.jpeg',
-  '/photos/roman-couple3.jpeg',
+  '/photos/xuraj-inside.jpeg',
 ]
 
 const LOVE_MESSAGES = [
@@ -218,7 +216,7 @@ function App() {
           </div>
           <div className="photo-frame">
             <div className="heart-shape">
-              <img src="/photos/insidelove.png" alt="Love" className="hero-photo" />
+              <img src="/photos/xuraj-love.jpeg" alt="Love" className="hero-photo" />
             </div>
           </div>
         </div>
