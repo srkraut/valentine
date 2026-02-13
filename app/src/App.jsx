@@ -1,7 +1,9 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import './App.css'
 
-const PHOTOS = []
+const PHOTOS = [
+  '/photos/samir-screenshot.png',
+]
 
 const LOVE_MESSAGES = [
   "From the moment I met you, my life became a beautiful adventure.",
